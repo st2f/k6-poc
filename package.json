@@ -1,0 +1,14 @@
+{
+  "name": "k6-poc",
+  "version": "1.0.0",
+  "description": "POC for K6 load testing",
+  "main": "index.js",
+  "scripts": {
+    "smoke": "TARGET_BASE_URL=http://localhost k6 run scripts/smoke.js",
+    "load": "TARGET_BASE_URL=https://localhost k6 run scripts/load.js",
+    "stress": "TARGET_BASE_URL=https://localhost k6 run scripts/stress.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

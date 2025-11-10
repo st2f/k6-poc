@@ -1,0 +1,26 @@
+name: K6 Performance POC
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  k6-tests:
+    runs-on: ubuntu-latest
+    env:
+      TARGET_BASE_URL: ${{ secrets.TARGET_BASE_URL }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run all K6 tests
+        run: |
+          for script in scripts/smoke.js scripts/load.js scripts/stress.js; do
+            echo "=== Running $script ==="
+            docker run --rm \
+              -e TARGET_BASE_URL=$TARGET_BASE_URL \
+              -v "${{ github.workspace }}:/scripts" \
+              -w /scripts \
+              grafana/k6 run --quiet $script
+          done
