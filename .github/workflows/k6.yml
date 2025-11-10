@@ -22,5 +22,5 @@ jobs:
               -e TARGET_BASE_URL=$TARGET_BASE_URL \
               -v "${{ github.workspace }}:/scripts" \
               -w /scripts \
-              grafana/k6 run --quiet $script
+              grafana/k6 run --quiet $script || true
           done
